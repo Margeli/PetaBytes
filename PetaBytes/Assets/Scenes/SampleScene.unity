@@ -227,7 +227,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.000000059604645, y: 0}
@@ -282,7 +282,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 236591632}
   m_LocalRotation: {x: -0.7071064, y: -0, z: -0, w: 0.7071072}
-  m_LocalPosition: {x: 0, y: 0, z: 0.2}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -373,7 +373,7 @@ GameObject:
   - component: {fileID: 547869273}
   - component: {fileID: 547869276}
   - component: {fileID: 547869272}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: animal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -444,7 +444,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 547869271}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 24.6, y: 10.6, z: 0.6}
+  m_LocalPosition: {x: 12.5, y: 5, z: 1}
   m_LocalScale: {x: 6.8626795, y: 6.8626804, z: 6.8626804}
   m_Children: []
   m_Father: {fileID: 0}
@@ -550,7 +550,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 566847076}
   m_LocalRotation: {x: -0.70710695, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 8.635506, y: 8.635513, z: 8.635513}
   m_Children:
   - {fileID: 874390379}
@@ -578,7 +578,6 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 1024
-  animals: {fileID: 0}
   scale: 0
   currentDmgDuration: 0
 --- !u!114 &566847082

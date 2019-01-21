@@ -14,7 +14,6 @@ public class Scream : MonoBehaviour {
     public float initialRadius = 1.0f;
     public float dmgDuration = 0.25f;
     public LayerMask mask;
-    public GameObject animals;
 
 
     [Header("-------- Read Only --------")]
