@@ -14,6 +14,7 @@ public class Scream : MonoBehaviour {
     public float initialRadius = 1.0f;
     public float dmgDuration = 0.25f;
     public LayerMask mask;
+    public float maxLoud = 100.0f;
 
 
     [Header("-------- Read Only --------")]
@@ -45,6 +46,7 @@ public class Scream : MonoBehaviour {
             for (int i = 0; i < colliders.Length; i++)
             {
                 AnimalBehaviour animal = colliders[i].gameObject.GetComponent<AnimalBehaviour>();
+               
                 if(animal)
                     animal.scared = true;
                  
@@ -66,5 +68,7 @@ public class Scream : MonoBehaviour {
 
         scale = Mathf.Clamp(scale, 0, maxRadius);
         scream.transform.localScale = new Vector3(scale, thin, scale);
+        scream.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z+0.5f);
+        dmgArea.transform.position = new Vector3(transform.position.x, transform.position.y , transform.position.z+ 0.5f);
     }
 }
