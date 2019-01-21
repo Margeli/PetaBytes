@@ -60,7 +60,9 @@ public class view_cone : MonoBehaviour {
 
         if (cols_found > 0)
         {
-            print("hey");
+            animal_behaviour.player_in_sight = true;
         }
+        else
+            animal_behaviour.player_in_sight = false;
     }
 }
