@@ -20,6 +20,7 @@ public class FollowCurve : SteeringAbstract
         currentRatio += 0.001f;
         if (currentRatio >= 1)
             currentRatio = 0;
+
         transform.position = path.CalcPositionByDistanceRatio(currentRatio);
 
     }
