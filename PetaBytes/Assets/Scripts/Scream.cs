@@ -66,5 +66,7 @@ public class Scream : MonoBehaviour {
 
         scale = Mathf.Clamp(scale, 0, maxRadius);
         scream.transform.localScale = new Vector3(scale, thin, scale);
+        scream.transform.position = transform.position;
+        dmgArea.transform.position = transform.position;
     }
 }

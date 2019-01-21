@@ -5,6 +5,7 @@ using UnityEngine;
 public class AnimalBehaviour : MonoBehaviour {
 
     public bool scared = false;
+    public bool player_in_sight = false;
 
 	// Use this for initialization
 	void Start () {
