@@ -10,13 +10,14 @@ public class Scream : MonoBehaviour {
     public GameObject dmgArea;
     public float spread = 0.5f;
     public float maxRadius =40;
-    float thin = 0.1f;
-    float initialRadius = 1.0f;
-    float dmgDuration = 2.0f;
+    public float thin = 0.1f;
+    public float initialRadius = 1.0f;
+    public float dmgDuration = 0.25f;
+
 
     [Header("-------- Read Only --------")]
-    public float scale;
-    
+    public float scale;    
+    public float currentDmgDuration;
 
 
 	// Use this for initialization
@@ -41,7 +42,18 @@ public class Scream : MonoBehaviour {
             scale = initialRadius;
         }
 
-       
+        if (dmgArea.activeInHierarchy)
+        {
+            if (currentDmgDuration < dmgDuration){
+                currentDmgDuration += Time.deltaTime;
+            }
+            else
+            {
+                dmgArea.SetActive(false);
+                currentDmgDuration = 0;
+            }
+        }
+
         scale = Mathf.Clamp(scale, 0, maxRadius);
         scream.transform.localScale = new Vector3(scale, thin, scale);
     }
