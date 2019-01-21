@@ -14,6 +14,13 @@ public class AnimalBehaviour : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        if (scared)
+        {
+            gameObject.SetActive(false);
+        }
+        if (player_in_sight)
+        {
+            Debug.Log("Player seen!");
+        }
 	}
 }
