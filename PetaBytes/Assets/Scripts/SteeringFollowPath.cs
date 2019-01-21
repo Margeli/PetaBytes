@@ -6,14 +6,13 @@ using BansheeGz.BGSpline.Curve;
 public class SteeringFollowPath : SteeringAbstract
 {
 
+    public BGCcMath path;
+    public float accuracy = 1.0f;
+
+    float current_percentage = 0.0f;
+    float distance_ratio = 0.1f;
     Move move;
     SteeringSeek seek;
-    public BGCcMath path;
-    float tot_distance;
-    float point_distance;
-    float current_pos;
-
-    Vector3 closest_point;
 
     // Use this for initialization
     void Start()
@@ -21,28 +20,35 @@ public class SteeringFollowPath : SteeringAbstract
         move = GetComponent<Move>();
         seek = GetComponent<SteeringSeek>();
 
-        //Calculate the closest point in the range [0,1] from this gameobject to the path
-        closest_point = path.CalcPositionByClosestPoint(transform.position, out point_distance);
-        tot_distance = path.GetDistance();
-        current_pos = point_distance / tot_distance;
+        // TODO 1: Calculate the closest point in the range [0,1] from this gameobject to the path
+        path.CalcPositionByClosestPoint(transform.position, out current_percentage);
+        distance_ratio = move.max_mov_velocity / path.GetDistance();
+        current_percentage /= path.GetDistance();
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        //Check if the tank is close enough to the desired point
-        seek.Steer(closest_point);
-
-        // If so, create a new point further ahead in the path
-        if ((transform.position - closest_point).magnitude <= 0.1)
+        if (path != null)
         {
-            current_pos += 0.01f;
-            if (current_pos >= 1)
-                current_pos = 0;
-            closest_point = path.CalcPositionByDistanceRatio(current_pos);
-        }
+            Vector3 target = Vector3.zero;
 
+            // TODO 2: Check if the tank is close enough to the desired point
+            // If so, create a new point further ahead in the path
+            target = path.CalcPositionByDistanceRatio(current_percentage);
+
+            //float path_len = path.length;
+            float distance = (target - transform.position).magnitude;
+
+            if (distance < accuracy)
+            {
+                current_percentage += distance_ratio;
+                if (current_percentage > 1.0f)
+                    current_percentage -= 1.0f;
+            }
+
+            seek.Steer(target, priority);
+        }
     }
 
     void OnDrawGizmosSelected()
@@ -52,7 +58,7 @@ public class SteeringFollowPath : SteeringAbstract
         {
             // Display the explosion radius when selected
             Gizmos.color = Color.green;
-            // Useful if you draw a sphere on the closest point to the path
+            Gizmos.DrawWireSphere(path.CalcPositionByClosestPoint(transform.position), accuracy);
         }
 
     }

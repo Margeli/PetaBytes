@@ -371,6 +371,7 @@ GameObject:
   - component: {fileID: 566847078}
   - component: {fileID: 566847077}
   - component: {fileID: 566847081}
+  - component: {fileID: 566847085}
   - component: {fileID: 566847084}
   - component: {fileID: 566847083}
   - component: {fileID: 566847082}
@@ -445,8 +446,7 @@ Transform:
   m_LocalRotation: {x: -0.70710695, y: -0, z: -0, w: 0.7071067}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 8.635506, y: 8.635513, z: 8.635513}
-  m_Children:
-  - {fileID: 1467446854}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 0}
@@ -465,7 +465,11 @@ MonoBehaviour:
   dmgArea: {fileID: 236591632}
   spread: 1
   maxRadius: 40
+  thin: 0.1
+  initialRadius: 1
+  dmgDuration: 0.25
   scale: 0
+  currentDmgDuration: 0
 --- !u!114 &566847082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -490,7 +494,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   priority: 0
-  path: {fileID: 1467446852}
+  path: {fileID: 1678630891}
+  accuracy: 1
 --- !u!114 &566847084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -503,14 +508,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  aim: {fileID: 0}
-  arrow: {fileID: 0}
   max_mov_velocity: 5
   max_mov_acceleration: 0.1
   max_rot_velocity: 10
   max_rot_acceleration: 0.1
   movement: {x: 0, y: 0, z: 0}
   rotation: 0
+--- !u!114 &566847085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 566847076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0f50b81252bae84f9804ff69da25d7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  priority: 0
+  path: {fileID: 1678630891}
 --- !u!1 &1201724255
 GameObject:
   m_ObjectHideFlags: 0
@@ -583,16 +599,16 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 0}
---- !u!1 &1467446851
+--- !u!1 &1678630890
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 1467446854}
-  - component: {fileID: 1467446853}
-  - component: {fileID: 1467446852}
+  - component: {fileID: 1678630893}
+  - component: {fileID: 1678630892}
+  - component: {fileID: 1678630891}
   m_Layer: 0
   m_Name: BGCurve
   m_TagString: Untagged
@@ -600,12 +616,12 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1467446852
+--- !u!114 &1678630891
 MonoBehaviour:
   m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1467446851}
+  m_GameObject: {fileID: 1678630890}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6d20671ad38ded4fa2362df353b9a31, type: 3}
@@ -631,12 +647,12 @@ MonoBehaviour:
   spheresScale: 1
   spheresColor: {r: 1, g: 1, b: 1, a: 1}
   spheresCount: 100
---- !u!114 &1467446853
+--- !u!114 &1678630892
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1467446851}
+  m_GameObject: {fileID: 1678630890}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e70f079e2a6bf364e8185b765fbe61c0, type: 3}
@@ -702,25 +718,25 @@ MonoBehaviour:
   closed: 1
   points:
   - controlType: 0
-    positionLocal: {x: 37.305504, y: 17.70077, z: 0}
+    positionLocal: {x: -0.029136658, y: 0.124191046, z: 0}
     controlFirstLocal: {x: 1, y: 0, z: 0}
     controlSecondLocal: {x: -1, y: -0, z: 0}
     pointTransform: {fileID: 0}
-    curve: {fileID: 1467446853}
+    curve: {fileID: 1678630892}
     fieldsValues: []
   - controlType: 0
-    positionLocal: {x: 31.13254, y: -14.872591, z: 0}
-    controlFirstLocal: {x: 1.2345929, y: 6.5146723, z: 0}
-    controlSecondLocal: {x: -1.2345929, y: -6.5146723, z: 0}
+    positionLocal: {x: 53.651592, y: 6.704408, z: 0}
+    controlFirstLocal: {x: -10.736146, y: -1.3160435, z: 0}
+    controlSecondLocal: {x: 10.736146, y: 1.3160435, z: 0}
     pointTransform: {fileID: 0}
-    curve: {fileID: 1467446853}
+    curve: {fileID: 1678630892}
     fieldsValues: []
   - controlType: 0
-    positionLocal: {x: 18.04821, y: 21.502426, z: 0}
-    controlFirstLocal: {x: 1.188331, y: -1.1883309, z: 0}
-    controlSecondLocal: {x: -1.188331, y: 1.1883309, z: 0}
+    positionLocal: {x: 51.22731, y: -25.1577, z: 0}
+    controlFirstLocal: {x: 0.4848564, y: 6.3724217, z: 0}
+    controlSecondLocal: {x: -0.4848564, y: -6.3724217, z: 0}
     pointTransform: {fileID: 0}
-    curve: {fileID: 1467446853}
+    curve: {fileID: 1678630892}
     fieldsValues: []
   pointsComponents: []
   pointsGameObjects: []
@@ -737,16 +753,16 @@ MonoBehaviour:
   eventMode: 0
   pointsMode: 0
   forceChangedEventMode: 0
---- !u!4 &1467446854
+--- !u!4 &1678630893
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1467446851}
-  m_LocalRotation: {x: 0.70710695, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -2.09, y: 0, z: -2.49}
-  m_LocalScale: {x: 0.115800984, y: 0.1158009, z: 0.1158009}
+  m_GameObject: {fileID: 1678630890}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 566847080}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
