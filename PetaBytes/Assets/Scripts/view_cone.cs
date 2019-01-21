@@ -10,21 +10,28 @@ public class view_cone : MonoBehaviour {
 
     public float d;
 
+    public LayerMask player_mask;
+    public ContactFilter2D player_filter_from_player_mask;
+
     Vector2[] points;
 
     PolygonCollider2D view_cone_polygon;
+
+    AnimalBehaviour animal_behaviour;
     
 	// Use this for initialization
 	void Start () {
         view_cone_polygon = gameObject.GetComponent<PolygonCollider2D>();
+        animal_behaviour = gameObject.GetComponentInParent<AnimalBehaviour>();
         points = new Vector2[3];
 
-
+        player_filter_from_player_mask.layerMask = player_mask;
 	}
 	
 	// Update is called once per frame
 	void Update () {
         SetTrianlge(view_distance, fov);
+        CheckIfPlayerInSight();
     }
 
     void SetTrianlge(float radius, float angle)
@@ -43,5 +50,17 @@ public class view_cone : MonoBehaviour {
 
         view_cone_polygon.SetPath(0,points);
 
+    }
+
+    void CheckIfPlayerInSight()
+    {
+        
+        Collider2D[] colliders_inside = new Collider2D[10];
+        int cols_found = view_cone_polygon.OverlapCollider(player_filter_from_player_mask, colliders_inside);
+
+        if (cols_found > 0)
+        {
+            print("hey");
+        }
     }
 }
