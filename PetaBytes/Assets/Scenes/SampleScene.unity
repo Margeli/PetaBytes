@@ -461,7 +461,11 @@ MonoBehaviour:
   dmgArea: {fileID: 236591632}
   spread: 1
   maxRadius: 40
+  thin: 0.1
+  initialRadius: 1
+  dmgDuration: 0.25
   scale: 0
+  currentDmgDuration: 0
 --- !u!1 &1201724255
 GameObject:
   m_ObjectHideFlags: 0
