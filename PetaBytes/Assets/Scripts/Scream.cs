@@ -13,6 +13,8 @@ public class Scream : MonoBehaviour {
     public float thin = 0.1f;
     public float initialRadius = 1.0f;
     public float dmgDuration = 0.25f;
+    public LayerMask mask;
+    public GameObject animals;
 
 
     [Header("-------- Read Only --------")]
@@ -39,6 +41,15 @@ public class Scream : MonoBehaviour {
         {            
             dmgArea.SetActive(true);
             dmgArea.transform.localScale = new Vector3(scale, thin, scale);
+            Vector2 pos = new Vector2(transform.position.x, transform.position.z);
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(pos , 0.5f * scale, mask);// 0.5 is the radius of the collider   
+            for (int i = 0; i < colliders.Length; i++)
+            {
+                AnimalBehaviour animal = colliders[i].gameObject.GetComponent<AnimalBehaviour>();
+                if(animal)
+                    animal.scared = true;
+                 
+            }
             scale = initialRadius;
         }
 
@@ -51,7 +62,7 @@ public class Scream : MonoBehaviour {
             {
                 dmgArea.SetActive(false);
                 currentDmgDuration = 0;
-            }
+            }           
         }
 
         scale = Mathf.Clamp(scale, 0, maxRadius);
