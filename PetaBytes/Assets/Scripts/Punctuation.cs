@@ -48,15 +48,9 @@ public class Punctuation : MonoBehaviour {
                 Invoke("ChangeToLevel", 2.0f);
                 preys = 3;
             }
-            else if (round == 3)
-            {
-                // Crate new round
-                nextLVL = LVL3;
-                Invoke("ChangeToLevel", 2.0f);
-                preys = 2;
-            }
             else
             {
+                preys = 1;
                 Invoke("LoadMenu", 2.0f);
             }
         }
