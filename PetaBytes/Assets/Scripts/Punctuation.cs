@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Punctuation : MonoBehaviour {
     public int points = 0;
     public int preys = 0;
     public int round = 0;
+    public bool detected = false;
+    public bool reset = false;
     private Text pointsText;
     private Text roundText;
     private float timer = 0.0f;
@@ -19,17 +22,26 @@ public class Punctuation : MonoBehaviour {
     }
 	
 	void Update () {
+        // Win Condition
 		if (preys == 0)
         {
             round++;
-            timer = 3.0f;
             roundText.text = "ROUND " + round;
+            timer = 3.0f;
 
             if (round == 1)
             {
                 // Crate new round
-                preys++;
+                preys = 2;
             }
+        }
+
+        // Lose Condition
+        if (detected && !reset)
+        {
+            roundText.text = "GAME OVER";
+            timer = 5.0f;
+            reset = true;
         }
 
         ShowRound();
@@ -58,6 +70,9 @@ public class Punctuation : MonoBehaviour {
         {
             if (roundText.enabled)
                 roundText.enabled = false;
+
+            if (reset)
+                SceneManager.LoadScene("mainScene");
         }
     }
 }
