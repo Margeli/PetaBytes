@@ -28,9 +28,14 @@ public class PlayerMove : MonoBehaviour {
         angular_velocity = 0f;
         player_collider = gameObject.GetComponent<CircleCollider2D>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    void OnCollisionEnter(Collision collision)
+    {
+
+    }
+
+        // Update is called once per frame
+        void Update () {
 
         Collider2D[] colliders_inside = new Collider2D[10];
         int cols_found = player_collider.OverlapCollider(walls_filter, colliders_inside);
@@ -38,18 +43,24 @@ public class PlayerMove : MonoBehaviour {
         {
             Vector3 out_vec;
             ContactPoint2D[] points = new ContactPoint2D[10];
-            player_collider.GetContacts(points);
-            out_vec.x = gameObject.transform.position.x - points[0].point.x;
-            out_vec.y = gameObject.transform.position.y - points[0].point.y; ;
-            out_vec.z = 0;
+            int pnumber = player_collider.GetContacts(points);
 
-            out_vec.Normalize();
+            if (pnumber > 0)
+            {
+                out_vec.x = gameObject.transform.position.x - points[0].point.x;
+                out_vec.y = gameObject.transform.position.y - points[0].point.y; ;
+                out_vec.z = 0;
 
-            movement_velocity = out_vec;
+                out_vec.Normalize();
 
-            transform.position += movement_velocity * Time.deltaTime;
+                print(pnumber);
 
-            return;
+                movement_velocity = out_vec;
+
+                transform.position += movement_velocity * Time.deltaTime;
+
+                return;
+            }
 
         }
         movement_velocity.x = 0;
