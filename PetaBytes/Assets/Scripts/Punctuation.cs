@@ -16,8 +16,8 @@ public class Punctuation : MonoBehaviour {
     private Text pointsText;
     private Text roundText;
     private float timer = 0.0f;
-    private GameObject actualLVL1 = null;
-    private GameObject actualLVL2 = null;
+    private GameObject currentLVL = null;
+    private GameObject nextLVL = null;
 
 	void Start () {
         pointsText = GameObject.Find("Points").GetComponent<Text>();
@@ -37,24 +37,15 @@ public class Punctuation : MonoBehaviour {
             if (round == 1)
             {
                 // Crate new round
-                actualLVL1 = Instantiate(LVL1);
-                AnimalBehaviour[]behaviours = actualLVL1.GetComponentsInChildren<AnimalBehaviour>();
-                foreach (AnimalBehaviour beh in behaviours)
-                {
-                    beh.animalsClips = audioController;
-                }
+                nextLVL = LVL1;
+                Invoke("ChangeToLevel", 2.0f);
                 preys = 2;
             }
             else if (round == 2)
             {
                 // Crate new round
-                Destroy(actualLVL1);
-                actualLVL2 = Instantiate(LVL2);
-                AnimalBehaviour[] behaviours = actualLVL2.GetComponentsInChildren<AnimalBehaviour>();
-                foreach (AnimalBehaviour beh in behaviours)
-                {
-                    beh.animalsClips = audioController;
-                }
+                nextLVL = LVL2;
+                Invoke("ChangeToLevel", 2.0f);
                 preys = 2;
             }
             else
@@ -111,5 +102,17 @@ public class Punctuation : MonoBehaviour {
     public void LoadMenu()
     {
         SceneManager.LoadScene("Intro");
+    }
+
+    public void ChangeToLevel()
+    {
+        if (currentLVL != null)
+            Destroy(currentLVL);
+        currentLVL = Instantiate(nextLVL);
+        AnimalBehaviour[] behaviours = currentLVL.GetComponentsInChildren<AnimalBehaviour>();
+        foreach (AnimalBehaviour beh in behaviours)
+        {
+            beh.animalsClips = audioController;
+        }
     }
 }
