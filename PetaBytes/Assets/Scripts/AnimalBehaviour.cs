@@ -20,29 +20,30 @@ public class AnimalBehaviour : MonoBehaviour {
     public Type type;
     // public GameObject panel;
 
-
+    public AnimalsClips animalsClips;
     public AudioSource audioSource;
     public AudioClip[] audioClips;
 
     bool fxPlayed = false;
     public float time;
 
-    public AnimalsClips animalsClips;
+   
     Animator anim;
     Animation death;
     Move move;
     FollowCurve followCurve;
     SteeringFollowPath followPath;
 
-	// Use this for initialization
-	void Start () {
-      audioSource.Pause();
-      audioClips = animalsClips.GetAudioClips(type);
+    // Use this for initialization
+    void Start()
+    {
+        //audioSource.Pause();
+        audioClips = animalsClips.GetAudioClips(type);
         anim = GetComponent<Animator>();
         move = GetComponent<Move>();
         followCurve = GetComponent<FollowCurve>();
         followPath = GetComponent<SteeringFollowPath>();
-     }
+    }
 	
 	// Update is called once per frame
 	void Update () {

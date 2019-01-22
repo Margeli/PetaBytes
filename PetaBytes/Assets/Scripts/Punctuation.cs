@@ -12,7 +12,6 @@ public class Punctuation : MonoBehaviour {
     public bool reset = false;
     public GameObject LVL1 = null;
     public GameObject LVL2 = null;
-    public AnimalsClips audioController = null;
     private Text pointsText;
     private Text roundText;
     private float timer = 0.0f;
@@ -109,10 +108,5 @@ public class Punctuation : MonoBehaviour {
         if (currentLVL != null)
             Destroy(currentLVL);
         currentLVL = Instantiate(nextLVL);
-        AnimalBehaviour[] behaviours = currentLVL.GetComponentsInChildren<AnimalBehaviour>();
-        foreach (AnimalBehaviour beh in behaviours)
-        {
-            beh.animalsClips = audioController;
-        }
     }
 }
