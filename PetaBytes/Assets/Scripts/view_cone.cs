@@ -82,9 +82,18 @@ public class view_cone : MonoBehaviour {
 
         if (cols_found > 0)
         {
-            animal_behaviour.player_in_sight = true;
+            bool player_seen = false;
+            foreach (Collider2D col in colliders_inside)
+            {
+                if (col)
+                    if (col.gameObject.tag == "Player")
+                        player_seen = true;
+            }
+            if (player_seen)
+                animal_behaviour.player_in_sight = true;
+            else
+                animal_behaviour.player_in_sight = false;
         }
-        else
-            animal_behaviour.player_in_sight = false;
+
     }
 }
