@@ -10,14 +10,14 @@ public class AnimalBehaviour : MonoBehaviour {
     public GameObject panel;
 
 
-    public AudioSource audioSource;
-    public AudioClip[] audioClips;
+   // public AudioSource audioSource;
+   // public AudioClip[] audioClips;
 
     bool fxPlayed = false;
     public float time;
 	// Use this for initialization
 	void Start () {
-        audioSource.Pause();
+      //  audioSource.Pause();
 	}
 	
 	// Update is called once per frame
@@ -27,13 +27,13 @@ public class AnimalBehaviour : MonoBehaviour {
             time += Time.deltaTime;
             if (!fxPlayed)
             {
-                audioSource.clip = audioClips[0];
-                audioSource.Play();
+               // audioSource.clip = audioClips[0];
+               // audioSource.Play();
             }
             if (time > 3f) //Must put set active to false when the animation done
             {
                 gameObject.SetActive(false);
-                audioSource.Pause();
+               // audioSource.Pause();
             }
         }
         if (player_in_sight)
