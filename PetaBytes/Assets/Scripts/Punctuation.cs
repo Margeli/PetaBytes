@@ -12,6 +12,7 @@ public class Punctuation : MonoBehaviour {
     public bool reset = false;
     public GameObject LVL1 = null;
     public GameObject LVL2 = null;
+    public GameObject LVL3 = null;
     private Text pointsText;
     private Text roundText;
     private float timer = 0.0f;
@@ -44,6 +45,13 @@ public class Punctuation : MonoBehaviour {
             {
                 // Crate new round
                 nextLVL = LVL2;
+                Invoke("ChangeToLevel", 2.0f);
+                preys = 2;
+            }
+            else if (round == 3)
+            {
+                // Crate new round
+                nextLVL = LVL3;
                 Invoke("ChangeToLevel", 2.0f);
                 preys = 2;
             }
