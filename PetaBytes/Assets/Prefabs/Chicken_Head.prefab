@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4503320527365394}
   - component: {fileID: 212010903208773492}
+  - component: {fileID: 114550899188518084}
   m_Layer: 0
   m_Name: Chicken_Head
   m_TagString: Untagged
@@ -34,12 +35,29 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1496920189450902}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -43.43, y: -7.26, z: -0.01}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalPosition: {x: 16.684986, y: -12.981083, z: 13.2}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114550899188518084
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1496920189450902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8a916f0287a4be4194e258558c435cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scared: 0
+  player_in_sight: 0
+  panel: {fileID: 0}
+  audioSource: {fileID: 0}
+  audioClips: []
+  time: 0
 --- !u!212 &212010903208773492
 SpriteRenderer:
   m_ObjectHideFlags: 1
