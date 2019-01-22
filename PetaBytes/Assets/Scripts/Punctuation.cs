@@ -46,7 +46,7 @@ public class Punctuation : MonoBehaviour {
                 // Crate new round
                 nextLVL = LVL2;
                 Invoke("ChangeToLevel", 2.0f);
-                preys = 2;
+                preys = 3;
             }
             else if (round == 3)
             {
