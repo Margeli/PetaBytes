@@ -25,16 +25,32 @@ public class AnimalBehaviour : MonoBehaviour {
 
     public AnimalsClips animalsClips;
 
-	// Use this for initialization
-	void Start () {
-      audioSource.Pause();
-      audioClips = animalsClips.GetAudioClips(type);
-	}
+    Move move;
+    FollowCurve followCurve;
+    SteeringFollowPath followPath;
+    // Use this for initialization
+    void Start()
+    {
+        move = GetComponent<Move>();
+        followCurve = GetComponent<FollowCurve>();
+        followPath = GetComponent<SteeringFollowPath>();
+        audioSource.Pause();
+        audioClips = animalsClips.GetAudioClips(type);
+    }
 	
 	// Update is called once per frame
 	void Update () {
         if (scared)
         {
+            if (move != null)
+                move.SetStop(true);
+            if (followPath != null)
+                followPath.SetStop(true);
+            if (followCurve != null)
+            {
+                followCurve.SetStop(true);
+            }
+
             time += Time.deltaTime;
             if (!fxPlayed)
             {

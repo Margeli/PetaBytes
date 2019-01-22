@@ -19,6 +19,12 @@ public class Move : MonoBehaviour {
 	private Vector3[] movement_velocity;
 	private float[] angular_velocity;
 
+    bool stop = false;
+    public void SetStop(bool active)
+    {
+        stop = active;
+    }
+    public  bool GetStop() { return stop; } 
 	public void Start()
 	{
 		movement_velocity = new Vector3[SteeringConf.num_priorities];
@@ -60,56 +66,59 @@ public class Move : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		Vector3 new_movement_velocity = Vector3.zero;
-		float new_angular_velocity = 0.0f;
+        if (!stop)
+        {
+            Vector3 new_movement_velocity = Vector3.zero;
+            float new_angular_velocity = 0.0f;
 
-		// Pick the lowest priority level
-		foreach(Vector3 v in movement_velocity)
-		{
-			if(Mathf.Approximately(v.magnitude, 0.0f) == false)
-			{
-				new_movement_velocity = v;
-				break;
-			}
-		}
+            // Pick the lowest priority level
+            foreach (Vector3 v in movement_velocity)
+            {
+                if (Mathf.Approximately(v.magnitude, 0.0f) == false)
+                {
+                    new_movement_velocity = v;
+                    break;
+                }
+            }
 
 
-		foreach(float f in angular_velocity)
-		{
-			if(Mathf.Approximately(f, 0.0f) == false)
-			{
-				new_angular_velocity = f;
-				break;
-			}
-		}
+            foreach (float f in angular_velocity)
+            {
+                if (Mathf.Approximately(f, 0.0f) == false)
+                {
+                    new_angular_velocity = f;
+                    break;
+                }
+            }
 
-		ResetPriorities();
+            ResetPriorities();
 
-		// Apply
-		movement += new_movement_velocity;
-		rotation += new_angular_velocity;
+            // Apply
+            movement += new_movement_velocity;
+            rotation += new_angular_velocity;
 
-		// cap velocity
-		if(movement.magnitude > max_mov_velocity)
-		{
-			movement.Normalize();
-			movement *= max_mov_velocity;
-		}
+            // cap velocity
+            if (movement.magnitude > max_mov_velocity)
+            {
+                movement.Normalize();
+                movement *= max_mov_velocity;
+            }
 
-		// cap rotation
-		Mathf.Clamp(rotation, -max_rot_velocity, max_rot_velocity);
+            // cap rotation
+            Mathf.Clamp(rotation, -max_rot_velocity, max_rot_velocity);
 
-		// rotate the arrow
-		//float angle = Mathf.Atan2(movement.x, movement.z);
-		//aim.transform.rotation = Quaternion.AngleAxis(Mathf.Rad2Deg * angle, Vector3.up);
+            // rotate the arrow
+            //float angle = Mathf.Atan2(movement.x, movement.z);
+            //aim.transform.rotation = Quaternion.AngleAxis(Mathf.Rad2Deg * angle, Vector3.up);
 
-		// strech it
-		//arrow.value = movement.magnitude * 4;
+            // strech it
+            //arrow.value = movement.magnitude * 4;
 
-		// final rotate
-		transform.rotation *= Quaternion.AngleAxis(rotation * Time.deltaTime, Vector3.up);
+            // final rotate
+            transform.rotation *= Quaternion.AngleAxis(rotation * Time.deltaTime, Vector3.up);
 
-		// finally move
-		transform.position += movement * Time.deltaTime;
+            // finally move
+            transform.position += movement * Time.deltaTime;
+        }
 	}
 }
