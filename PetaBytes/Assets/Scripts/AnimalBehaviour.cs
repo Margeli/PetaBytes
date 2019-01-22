@@ -6,6 +6,9 @@ public class AnimalBehaviour : MonoBehaviour {
 
     public bool scared = false;
     public bool player_in_sight = false;
+    public bool dead = false;
+    public float deadTime = 2;
+    float deadTimer = 0;
 
     public enum Type {
         NONE,
@@ -24,19 +27,21 @@ public class AnimalBehaviour : MonoBehaviour {
     public float time;
 
     public AnimalsClips animalsClips;
-
+    Animator anim;
+    Animation death;
     Move move;
     FollowCurve followCurve;
     SteeringFollowPath followPath;
-    // Use this for initialization
-    void Start()
-    {
+
+	// Use this for initialization
+	void Start () {
+      audioSource.Pause();
+      audioClips = animalsClips.GetAudioClips(type);
+        anim = GetComponent<Animator>();
         move = GetComponent<Move>();
         followCurve = GetComponent<FollowCurve>();
         followPath = GetComponent<SteeringFollowPath>();
-        audioSource.Pause();
-        audioClips = animalsClips.GetAudioClips(type);
-    }
+     }
 	
 	// Update is called once per frame
 	void Update () {
@@ -54,6 +59,14 @@ public class AnimalBehaviour : MonoBehaviour {
             time += Time.deltaTime;
             if (!fxPlayed)
             {
+                if (type == Type.CHICKEN)
+                {
+                    anim.Play("ChickenDie");
+                }
+                if(type == Type.PIG)
+                {
+                    anim.Play("PigDie");
+                }
                 audioSource.PlayOneShot(audioClips[0]);
                 GameObject.Find("PointsGO").GetComponent<Punctuation>().preys--;
                 GameObject.Find("PointsGO").GetComponent<Punctuation>().UpdatePoints(100);
@@ -61,7 +74,7 @@ public class AnimalBehaviour : MonoBehaviour {
             }
             if (!audioSource.isPlaying) //Must put set active to false when the animation done
             {
-                gameObject.SetActive(false);
+                dead = true;               
                 audioSource.Pause();
             }
         }
@@ -70,6 +83,19 @@ public class AnimalBehaviour : MonoBehaviour {
            // panel.SetActive(true);
             Debug.Log("Player seen!");
             GameObject.Find("PointsGO").GetComponent<Punctuation>().detected = true;
+            
+        }
+        if (dead)
+        {
+            if (deadTimer > deadTime)
+            {
+
+                gameObject.SetActive(false);
+            }
+            else
+            {
+                deadTimer += Time.deltaTime;
+            }
         }
 	}
 }

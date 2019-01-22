@@ -16,6 +16,8 @@ public class Punctuation : MonoBehaviour {
     private Text pointsText;
     private Text roundText;
     private float timer = 0.0f;
+    private GameObject actualLVL1 = null;
+    private GameObject actualLVL2 = null;
 
 	void Start () {
         pointsText = GameObject.Find("Points").GetComponent<Text>();
@@ -35,25 +37,29 @@ public class Punctuation : MonoBehaviour {
             if (round == 1)
             {
                 // Crate new round
-                GameObject level = Instantiate(LVL1);
-                AnimalBehaviour[]behaviours = level.GetComponentsInChildren<AnimalBehaviour>();
+                actualLVL1 = Instantiate(LVL1);
+                AnimalBehaviour[]behaviours = actualLVL1.GetComponentsInChildren<AnimalBehaviour>();
                 foreach (AnimalBehaviour beh in behaviours)
                 {
                     beh.animalsClips = audioController;
                 }
                 preys = 2;
             }
-
-            if (round == 2)
+            else if (round == 2)
             {
                 // Crate new round
-                GameObject level = Instantiate(LVL2);
-                AnimalBehaviour[] behaviours = level.GetComponentsInChildren<AnimalBehaviour>();
+                Destroy(actualLVL1);
+                actualLVL2 = Instantiate(LVL2);
+                AnimalBehaviour[] behaviours = actualLVL2.GetComponentsInChildren<AnimalBehaviour>();
                 foreach (AnimalBehaviour beh in behaviours)
                 {
                     beh.animalsClips = audioController;
                 }
                 preys = 2;
+            }
+            else
+            {
+                LoadMenu();
             }
         }
 
@@ -100,5 +106,10 @@ public class Punctuation : MonoBehaviour {
     public void LoadGame()
     {
         SceneManager.LoadScene("mainScene");
+    }
+
+    public void LoadMenu()
+    {
+        SceneManager.LoadScene("Intro");
     }
 }
