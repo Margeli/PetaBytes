@@ -10,6 +10,9 @@ public class Punctuation : MonoBehaviour {
     public int round = 0;
     public bool detected = false;
     public bool reset = false;
+    public GameObject LVL1 = null;
+    public GameObject LVL2 = null;
+    public AnimalsClips audioController = null;
     private Text pointsText;
     private Text roundText;
     private float timer = 0.0f;
@@ -32,6 +35,24 @@ public class Punctuation : MonoBehaviour {
             if (round == 1)
             {
                 // Crate new round
+                GameObject level = Instantiate(LVL1);
+                AnimalBehaviour[]behaviours = level.GetComponentsInChildren<AnimalBehaviour>();
+                foreach (AnimalBehaviour beh in behaviours)
+                {
+                    beh.animalsClips = audioController;
+                }
+                preys = 2;
+            }
+
+            if (round == 2)
+            {
+                // Crate new round
+                GameObject level = Instantiate(LVL2);
+                AnimalBehaviour[] behaviours = level.GetComponentsInChildren<AnimalBehaviour>();
+                foreach (AnimalBehaviour beh in behaviours)
+                {
+                    beh.animalsClips = audioController;
+                }
                 preys = 2;
             }
         }
