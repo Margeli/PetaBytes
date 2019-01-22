@@ -51,6 +51,7 @@ public class AnimalBehaviour : MonoBehaviour {
         {
            // panel.SetActive(true);
             Debug.Log("Player seen!");
+            GameObject.Find("PointsGO").GetComponent<Punctuation>().detected = true;
         }
 	}
 }

@@ -10,9 +10,8 @@ public class view_cone : MonoBehaviour {
 
     public float d;
 
-    public LayerMask player_mask;
     public ContactFilter2D player_filter_from_player_mask;
-    public ContactFilter2D walls_filter;
+    public LayerMask walls_layer;
 
     Vector2[] points;
 
@@ -25,15 +24,12 @@ public class view_cone : MonoBehaviour {
         view_cone_polygon = gameObject.GetComponent<PolygonCollider2D>();
         animal_behaviour = gameObject.GetComponentInParent<AnimalBehaviour>();
         points = new Vector2[6];
-
-        player_filter_from_player_mask.layerMask = player_mask;
 	}
 	
 	// Update is called once per frame
 	void Update () {
         SetTrianlge(view_distance, fov);
         CheckIfPlayerInSight();
-        CheckForWalls();
     }
 
     void SetTrianlge(float radius, float angle)
@@ -62,18 +58,6 @@ public class view_cone : MonoBehaviour {
 
     }
 
-    void CheckForWalls()
-    {
-        Collider2D[] colliders_inside = new Collider2D[10];
-        int cols_found = view_cone_polygon.OverlapCollider(walls_filter, colliders_inside);
-
-        if (cols_found > 0)
-        {
-            PolygonCollider2D view_cone_polygon = colliders_inside[0].GetComponent<PolygonCollider2D>();
-            print("ehat");
-        }
-    }
-
     void CheckIfPlayerInSight()
     {
         
@@ -86,8 +70,23 @@ public class view_cone : MonoBehaviour {
             foreach (Collider2D col in colliders_inside)
             {
                 if (col)
+                {
                     if (col.gameObject.tag == "Player")
+                    {
                         player_seen = true;
+                        Transform parent_trans = gameObject.GetComponentInParent<Transform>();
+                        Vector2 direction = col.gameObject.transform.position - parent_trans.position;
+
+
+
+                        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, 20,walls_layer);
+
+                        if (hit.collider != null)
+                        {
+                                player_seen = false;
+                        }
+                    }
+                }
             }
             if (player_seen)
                 animal_behaviour.player_in_sight = true;
