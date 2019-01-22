@@ -7,17 +7,28 @@ public class AnimalBehaviour : MonoBehaviour {
     public bool scared = false;
     public bool player_in_sight = false;
 
-   // public GameObject panel;
+    public enum Type {
+        NONE,
+        CHICKEN,
+        PIG
+    }
+
+    public Type type;
+    // public GameObject panel;
 
 
-   // public AudioSource audioSource;
-   // public AudioClip[] audioClips;
+    public AudioSource audioSource;
+    public AudioClip[] audioClips;
 
     bool fxPlayed = false;
     public float time;
+
+    public AnimalsClips animalsClips;
+
 	// Use this for initialization
 	void Start () {
-      //  audioSource.Pause();
+      audioSource.Pause();
+      audioClips = animalsClips.GetAudioClips(type);
 	}
 	
 	// Update is called once per frame
@@ -27,13 +38,13 @@ public class AnimalBehaviour : MonoBehaviour {
             time += Time.deltaTime;
             if (!fxPlayed)
             {
-               // audioSource.clip = audioClips[0];
-               // audioSource.Play();
+                audioSource.PlayOneShot(audioClips[0]);
+                fxPlayed = true;
             }
-            if (time > 3f) //Must put set active to false when the animation done
+            if (!audioSource.isPlaying) //Must put set active to false when the animation done
             {
                 gameObject.SetActive(false);
-               // audioSource.Pause();
+                audioSource.Pause();
             }
         }
         if (player_in_sight)
