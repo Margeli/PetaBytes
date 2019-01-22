@@ -14,6 +14,12 @@ public class SteeringFollowPath : SteeringAbstract
     Move move;
     SteeringSeek seek;
 
+    bool stop = false;
+    public void SetStop(bool active)
+    {
+        stop = active;
+    }
+    public bool GetStop() { return stop; }
     // Use this for initialization
     void Start()
     {
@@ -29,7 +35,8 @@ public class SteeringFollowPath : SteeringAbstract
     // Update is called once per frame
     void Update()
     {
-        if (path != null)
+
+        if (!stop && path != null)
         {
             Vector3 target = Vector3.zero;
 

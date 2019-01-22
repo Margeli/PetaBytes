@@ -29,18 +29,33 @@ public class AnimalBehaviour : MonoBehaviour {
     public AnimalsClips animalsClips;
     Animator anim;
     Animation death;
+    Move move;
+    FollowCurve followCurve;
+    SteeringFollowPath followPath;
 
 	// Use this for initialization
 	void Start () {
       audioSource.Pause();
       audioClips = animalsClips.GetAudioClips(type);
         anim = GetComponent<Animator>();
-	}
+        move = GetComponent<Move>();
+        followCurve = GetComponent<FollowCurve>();
+        followPath = GetComponent<SteeringFollowPath>();
+     }
 	
 	// Update is called once per frame
 	void Update () {
         if (scared)
         {
+            if (move != null)
+                move.SetStop(true);
+            if (followPath != null)
+                followPath.SetStop(true);
+            if (followCurve != null)
+            {
+                followCurve.SetStop(true);
+            }
+
             time += Time.deltaTime;
             if (!fxPlayed)
             {
@@ -53,6 +68,8 @@ public class AnimalBehaviour : MonoBehaviour {
                     anim.Play("PigDie");
                 }
                 audioSource.PlayOneShot(audioClips[0]);
+                GameObject.Find("PointsGO").GetComponent<Punctuation>().preys--;
+                GameObject.Find("PointsGO").GetComponent<Punctuation>().UpdatePoints(100);
                 fxPlayed = true;
             }
             if (!audioSource.isPlaying) //Must put set active to false when the animation done
