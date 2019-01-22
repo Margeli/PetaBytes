@@ -10,6 +10,10 @@ public class PlayerMove : MonoBehaviour {
     public float max_rot_velocity = 10.0f; // in degrees / second
     public float max_rot_acceleration = 0.1f;
 
+    public ContactFilter2D walls_filter;
+
+    CircleCollider2D player_collider;
+
 
     [Header("-------- Read Only --------")]
     public Vector3 movement = Vector3.zero;
@@ -22,10 +26,34 @@ public class PlayerMove : MonoBehaviour {
     void Start () {
         movement_velocity = Vector3.zero;
         angular_velocity = 0f;
+        player_collider = gameObject.GetComponent<CircleCollider2D>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+        Collider2D[] colliders_inside = new Collider2D[10];
+        int cols_found = player_collider.OverlapCollider(walls_filter, colliders_inside);
+        if (cols_found > 0)
+        {
+            Vector3 out_vec;
+            ContactPoint2D[] points = new ContactPoint2D[10];
+            player_collider.GetContacts(points);
+            out_vec.x = gameObject.transform.position.x - points[0].point.x;
+            out_vec.y = gameObject.transform.position.y - points[0].point.y; ;
+            out_vec.z = 0;
+
+            out_vec.Normalize();
+
+            movement_velocity = out_vec;
+
+            transform.position += movement_velocity * Time.deltaTime;
+
+            return;
+
+        }
+        movement_velocity.x = 0;
+        movement_velocity.y = 0;
 
         if (Input.GetKey(KeyCode.W))
         {
