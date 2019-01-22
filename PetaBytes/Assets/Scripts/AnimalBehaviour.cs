@@ -7,7 +7,7 @@ public class AnimalBehaviour : MonoBehaviour {
     public bool scared = false;
     public bool player_in_sight = false;
     public bool dead = false;
-    public float deadTime = 2;
+    public float deadTime = 1.5f;
     public GameObject exclamation;
     float deadTimer = 0;
 
