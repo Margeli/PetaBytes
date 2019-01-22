@@ -49,7 +49,7 @@ public class Punctuation : MonoBehaviour {
             }
             else
             {
-                LoadMenu();
+                Invoke("LoadMenu", 2.0f);
             }
         }
 
