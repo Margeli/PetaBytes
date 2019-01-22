@@ -75,4 +75,9 @@ public class Punctuation : MonoBehaviour {
                 SceneManager.LoadScene("mainScene");
         }
     }
+
+    public void LoadGame()
+    {
+        SceneManager.LoadScene("mainScene");
+    }
 }
