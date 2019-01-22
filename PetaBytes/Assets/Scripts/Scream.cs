@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Scream : MonoBehaviour {
 
+    public AudioSource audioSource;
+    public AudioClip audioClip;
 
     public GameObject scream;
     public GameObject dmgArea;
@@ -48,9 +50,12 @@ public class Scream : MonoBehaviour {
             for (int i = 0; i < colliders.Length; i++)
             {
                 AnimalBehaviour animal = colliders[i].gameObject.GetComponent<AnimalBehaviour>();
-               
-                if(animal)
+
+                if (animal)
+                {
                     animal.scared = true;
+                    audioSource.PlayOneShot(audioClip);
+                }
                 Vector3 dist =animal.transform.position - transform.position;
                 float n = dist.magnitude;
                  

@@ -7,7 +7,12 @@ public class FollowCurve : SteeringAbstract
 {
     float currentRatio = 0.0f;
     public BGCcMath path;
-
+    bool stop = false;
+    public void SetStop(bool active)
+    {
+        stop = active;
+    }
+    public bool GetStop() { return stop; }
     // Use this for initialization
     void Start()
     {
@@ -17,11 +22,13 @@ public class FollowCurve : SteeringAbstract
     // Update is called once per frame
     void Update()
     {
-        currentRatio += 0.001f;
-        if (currentRatio >= 1)
-            currentRatio = 0;
+        if (!stop)
+        {
+            currentRatio += 0.001f;
+            if (currentRatio >= 1)
+                currentRatio = 0;
 
-        transform.position = path.CalcPositionByDistanceRatio(currentRatio);
-
+            transform.position = path.CalcPositionByDistanceRatio(currentRatio);
+        }
     }
 }
