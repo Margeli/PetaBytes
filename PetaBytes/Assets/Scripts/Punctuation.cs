@@ -72,7 +72,7 @@ public class Punctuation : MonoBehaviour {
         points += pointsToAdd;
         if (points < 0)
             points = 0;
-        pointsText.text = "Points: " + points;
+        pointsText.text = "Points " + points;
     }
 
     void ShowRound()
