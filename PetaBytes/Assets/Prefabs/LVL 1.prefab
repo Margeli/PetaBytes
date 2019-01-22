@@ -2112,7 +2112,7 @@ MonoBehaviour:
   audioClip: {fileID: 8300000, guid: 8f9f1f171fee0f94da96b17780a711a1, type: 3}
   scream: {fileID: 1849656129242248}
   dmgArea: {fileID: 1441768327900056}
-  spread: 1
+  spread: 0.5
   maxRadius: 40
   thin: 0.1
   initialRadius: 1
@@ -2273,7 +2273,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d3a2f1fdf14cb224fa67a9440e67d9a9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 77fe805e6c1046b4dbf22e9b8c3ffc08, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 1
