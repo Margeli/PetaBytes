@@ -8,6 +8,7 @@ public class AnimalBehaviour : MonoBehaviour {
     public bool player_in_sight = false;
     public bool dead = false;
     public float deadTime = 2;
+    public GameObject exclamation;
     float deadTimer = 0;
 
     public enum Type {
@@ -83,6 +84,7 @@ public class AnimalBehaviour : MonoBehaviour {
            // panel.SetActive(true);
             Debug.Log("Player seen!");
             GameObject.Find("PointsGO").GetComponent<Punctuation>().detected = true;
+            exclamation.SetActive(true);
             
         }
         if (dead)
