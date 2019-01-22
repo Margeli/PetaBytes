@@ -55,6 +55,8 @@ public class AnimalBehaviour : MonoBehaviour {
             if (!fxPlayed)
             {
                 audioSource.PlayOneShot(audioClips[0]);
+                GameObject.Find("PointsGO").GetComponent<Punctuation>().preys--;
+                GameObject.Find("PointsGO").GetComponent<Punctuation>().UpdatePoints(100);
                 fxPlayed = true;
             }
             if (!audioSource.isPlaying) //Must put set active to false when the animation done
