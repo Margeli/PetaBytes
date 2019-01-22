@@ -287,9 +287,6 @@ MonoBehaviour:
   view_distance: 25
   fov: 70
   d: 0
-  player_mask:
-    serializedVersion: 2
-    m_Bits: 0
   player_filter_from_player_mask:
     useTriggers: 0
     useLayerMask: 0
@@ -304,20 +301,9 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
-  walls_filter:
-    useTriggers: 0
-    useLayerMask: 0
-    useDepth: 0
-    useOutsideDepth: 0
-    useNormalAngle: 0
-    useOutsideNormalAngle: 0
-    layerMask:
-      serializedVersion: 2
-      m_Bits: 0
-    minDepth: 0
-    maxDepth: 0
-    minNormalAngle: 0
-    maxNormalAngle: 0
+  walls_layer:
+    serializedVersion: 2
+    m_Bits: 2048
 --- !u!114 &114512483424971514
 MonoBehaviour:
   m_ObjectHideFlags: 1

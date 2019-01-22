@@ -20,6 +20,7 @@ public class Scream : MonoBehaviour {
     [Header("-------- Read Only --------")]
     public float scale;    
     public float currentDmgDuration;
+    int j = 1;
 
 
 	// Use this for initialization
@@ -40,6 +41,7 @@ public class Scream : MonoBehaviour {
         if (Input.GetKeyUp(KeyCode.Space))
         {            
             dmgArea.SetActive(true);
+            scream.SetActive(false);
             dmgArea.transform.localScale = new Vector3(scale, thin, scale);
             Vector2 pos = new Vector2(transform.position.x, transform.position.z);
             Collider2D[] colliders = Physics2D.OverlapCircleAll(pos , 0.5f * scale, mask);// 0.5 is the radius of the collider   
@@ -58,11 +60,20 @@ public class Scream : MonoBehaviour {
         {
             if (currentDmgDuration < dmgDuration){
                 currentDmgDuration += Time.deltaTime;
+                if (currentDmgDuration< dmgDuration* j / 4)
+                {
+                    dmgArea.transform.Rotate(new Vector3(0, 50, 0));
+                    dmgArea.transform.localScale = new Vector3(dmgArea.transform.localScale.x - 0.05f*((-1)^j), thin, dmgArea.transform.localScale.z -  0.05f*((-1) ^ j));
+                    j++;
+                }
+                
             }
             else
             {
                 dmgArea.SetActive(false);
+                scream.SetActive(true);
                 currentDmgDuration = 0;
+                j = 1;
             }           
         }
 
