@@ -7,7 +7,7 @@ public class AnimalBehaviour : MonoBehaviour {
     public bool scared = false;
     public bool player_in_sight = false;
 
-    public GameObject panel;
+   // public GameObject panel;
 
 
    // public AudioSource audioSource;
@@ -38,7 +38,7 @@ public class AnimalBehaviour : MonoBehaviour {
         }
         if (player_in_sight)
         {
-            panel.SetActive(true);
+           // panel.SetActive(true);
             Debug.Log("Player seen!");
         }
 	}
